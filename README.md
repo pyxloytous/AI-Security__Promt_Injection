@@ -12,7 +12,7 @@ The script loads the model (locally or from Hugging Face), prepares a safe syste
 
 🧩 Overview
 This project provides a simple, CPU‑friendly text‑generation program built around Microsoft’s Phi‑2 model.
-Its purpose is to help developers explore:
+Its purpose is to help developers explore: 
 
 🔹how prompt‑injection works
 
