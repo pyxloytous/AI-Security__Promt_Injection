@@ -1,5 +1,5 @@
 
-📘 A simple Text Generator Powered by Phi‑2 - (--> Though this could be written as modules but for the time being let it be as it is as I am full of leazyness now :D)
+📘 A simple Text Generator Powered by vsarious configurable LLM models - (--> Though this could be written as modules but for the time being let it be as it is as I am full of leazyness now :D)
 
 A simple tool for studying prompt‑injection and jailbreak behavior in LLMs
 
@@ -10,7 +10,7 @@ Its purpose is to help developers understand how prompt‑injection and jailbrea
 The script loads the model (locally or from Hugging Face), prepares a safe system prompt, and gives you a simple command‑line interface to experiment with user prompts and observe model behavior.
 
 
-🧩 Overview
+🧩 Overview:
 This project provides a simple, CPU‑friendly text‑generation program built around Microsoft’s Phi‑2 model.
 Its purpose is to help developers explore: 
 
@@ -38,9 +38,10 @@ Its purpose is to help developers explore:
 🖥️ CPU‑only execution for maximum compatibility
 
 
-📦 Installation
+📦 Installation:
 
 ==> Create a virtual environment and ENSURE its path should be added to the user's environment variable else installed llibraries in the venv would not be picked during call:
+
 python -m venv env_name
  .\venv_name\Scripts\activate
 
@@ -48,22 +49,27 @@ python -m ensurepip --upgrade   # --> Installs PIP if not installed.
 python -m pip install --upgrade pip
 
 ==> Clone the repository:
+
 [git clone https://github.com/<your-username>/<repo-name>.git](https://github.com/pyxloytous/AI-Security__Promt_Injection.git)
 
 cd <repo-name>
 
 ==> Install dependencies:
+
 pip install -r requirements.txt
 
-==> Check installed dependencies from withing ACTIVATED venv dir
+==> Check installed dependencies from withing ACTIVATED venv dir:
+
 pip list
 
 
 ▶️ Usage
 Run the main script:
+
 python text_generator.py - > (optionally pass prompt file or if not passed it would ask at run time as below)
 
 And You’ll see:
+
 [-] Please ask your question here >
 Type any prompt you want to test.
 
