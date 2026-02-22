@@ -56,7 +56,7 @@ python -m pip install --upgrade pip
 
 [git clone https://github.com/<your-username>/<repo-name>.git](https://github.com/pyxloytous/AI-Security__Promt_Injection.git)
 
-cd <repo-name>
+cd REPO_NAME
 
 ==> Install dependencies:
 
