@@ -1,29 +1,30 @@
 
 📘 A simple Text Generator Powered by Phi‑2 - (--> Though this could be written as modules but for the time being let it be as it is as I am full of leazyness now :D)
+
 A simple tool for studying prompt‑injection and jailbreak behavior in LLMs
-This project provides a lightweight text‑generation program built around Microsoft’s Phi‑2 model. Its purpose is to help developers understand how prompt‑injection and jailbreak attacks work, how models can be manipulated into ignoring safety rules, and how to test the effectiveness of different defensive strategies.
+
+This project provides a lightweight text‑generation program built around Microsoft’s Phi‑2 model.
+
+Its purpose is to help developers understand how prompt‑injection and jailbreak attacks work, how models can be manipulated into ignoring safety rules, and how to test the effectiveness of different defensive strategies.
+
 The script loads the model (locally or from Hugging Face), prepares a safe system prompt, and gives you a simple command‑line interface to experiment with user prompts and observe model behavior.
 
-https://img.shields.io/badge/Python-3.10+-blue.svg
-https://img.shields.io/badge/Transformers-HuggingFace-orange.svg
-https://img.shields.io/badge/Status-Active-brightgreen.svg
-https://img.shields.io/badge/License-MIT-green.svg
 
 🧩 Overview
 This project provides a simple, CPU‑friendly text‑generation program built around Microsoft’s Phi‑2 model.
 Its purpose is to help developers explore:
 
-how prompt‑injection works
+🔹how prompt‑injection works
 
-how jailbreak attempts manipulate model behavior
+🔹how jailbreak attempts manipulate model behavior
 
-how LLMs respond to adversarial prompts
+🔹how LLMs respond to adversarial prompts
 
-how to design and test defensive system prompts
+🔹how to design and test defensive system prompts
 
-The script automatically loads a local model if available, or downloads it from Hugging Face and saves it for future runs. A clean command‑line interface lets you interact with the model and observe its behavior in real time.
+🔹The script automatically loads a local model if available, or downloads it from Hugging Face and saves it for future runs. A clean command‑line interface lets you interact with the model and observe its behavior in real time.
 
-🚀 Features
+🚀 Features:
 🔍 Auto‑detect local model/tokenizer
 
 ⬇️ Auto‑download model if if not present in a local specific path
@@ -47,7 +48,7 @@ python -m ensurepip --upgrade   # --> Installs PIP if not installed.
 python -m pip install --upgrade pip
 
 ==> Clone the repository:
-git clone https://github.com/<your-username>/<repo-name>.git
+[git clone https://github.com/<your-username>/<repo-name>.git](https://github.com/pyxloytous/AI-Security__Promt_Injection.git)
 cd <repo-name>
 
 ==> Install dependencies:
@@ -92,32 +93,6 @@ The script identifies if model of tokenizer is not already present in the local 
 <img width="1654" height="344" alt="image" src="https://github.com/user-attachments/assets/f1b9397f-cc92-465f-8c14-8d339402018e" />
 
 <img width="1666" height="935" alt="image" src="https://github.com/user-attachments/assets/6d1642e9-3b1d-42dc-a954-a9f38729c767" />
-
-
-
-
-📁 Project Structure
-Code
-AI-Security__Promt_Injection/
-
-│
-
-├── README.md
-
-├── requirements.txt
-
-├── .gitignore
-
-│
-
-├── script/
-
-│   ├── text_generator.py
-
-│   ├── config.txt
-
-│   └── prompts.txt
-
 
 
 
