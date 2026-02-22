@@ -26,15 +26,16 @@ The script automatically loads a local model if available, or downloads it from 
 🚀 Features
 🔍 Auto‑detect local model/tokenizer
 
-⬇️ Auto‑download Phi‑2 if missing
+⬇️ Auto‑download model if if not present in a local specific path
 
-🧠 Built‑in safety‑focused system prompt
+🧠 Added basic safety‑focused system prompt
 
 💬 Simple CLI chat interface
 
 🧪 Ideal for studying jailbreaks & prompt injection
 
 🖥️ CPU‑only execution for maximum compatibility
+
 
 📦 Installation
 
@@ -98,23 +99,37 @@ The script identifies if model of tokenizer is not already present in the local 
 📁 Project Structure
 Code
 AI-Security__Promt_Injection/
+
 │
+
 ├── README.md
+
 ├── requirements.txt
+
 ├── .gitignore
+
 │
+
 ├── script/
+
 │   ├── text_generator.py
+
 │   ├── config.txt
+
 │   └── prompts.txt
+
 
 
 
 🧪 Example Use Cases
 Testing jailbreak prompts
+
 Studying prompt‑injection vectors
+
 Evaluating safety‑prompt effectiveness
+
 Understanding how non‑chat models behave in chat‑like settings
+
 Building your own defensive prompt strategies
 
 📄 License
