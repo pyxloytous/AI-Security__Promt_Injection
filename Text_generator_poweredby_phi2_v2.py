@@ -1,4 +1,4 @@
-# version: v1   # I like to hardcode version numbers in the code file other than git applying git version control - Its my habit :D
+# version: v2   # I like to hardcode version numbers in the code file other than git applying git version control - Its my habit :D
 '''
 This is a simple text-generation program designed to test prompt-injection and jailbreak vulnerabilities. \
 The goal is to understand how these attacks work, how a model can be manipulated into ignoring its own built-in ethics, \
@@ -180,4 +180,5 @@ while True:
 
 # No main function is defined because the script is written in a linear style rather than an object‑oriented one.
 # Kept as it is for latter enhacement
+
 
