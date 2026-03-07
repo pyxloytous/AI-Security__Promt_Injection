@@ -110,9 +110,10 @@ This setup makes it easy to test how different prompts influence model behavior 
 
 <img width="1671" height="947" alt="image" src="https://github.com/user-attachments/assets/173a2d1b-98b5-4034-ae67-ad1047e99c2d" />
 
-The script identifies if model of tokenizer is not already present in the local specific dir, it tries to download and save it there to next time use.
+The script checks if model or tokenizer is not already present in the local specific dir, it tries to download and save it there to next time use.
 
-<img width="1654" height="344" alt="image" src="https://github.com/user-attachments/assets/f1b9397f-cc92-465f-8c14-8d339402018e" />
+<img width="1654" height="344" alt="image" src="https://github.com/user-attachments/assets/c62fe038-ad47-4579-9e9e-582810ad3229" />
+
 
 <img width="1666" height="935" alt="image" src="https://github.com/user-attachments/assets/6d1642e9-3b1d-42dc-a954-a9f38729c767" />
 
