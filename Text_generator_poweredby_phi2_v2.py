@@ -140,7 +140,7 @@ def generate_response(combined_prompts, promt_file_passed, start_time):
 
     # Returning model's response incase if it is required further processing
     if returned_response:
-        return {returned_response: returned_response}
+        return {'returned_response': returned_response}
 
 
 # --> A basic command line chat interface to pass user prompt to model
@@ -180,3 +180,4 @@ while True:
 
 # No main function is defined because the script is written in a linear style rather than an object‑oriented one.
 # Kept as it is for latter enhacement
+
