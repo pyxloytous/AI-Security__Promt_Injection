@@ -116,6 +116,9 @@ The script checks if model or tokenizer is not already present in the local spec
 
 When the model is correctly loaded, This is how it gets ready for conversation
 
+<img width="1919" height="994" alt="image" src="https://github.com/user-attachments/assets/c0408079-cdf5-43b5-b2a2-618ce2f960fa" />
+
+
 <img width="1670" height="939" alt="image" src="https://github.com/user-attachments/assets/df6799c7-99cc-4471-b7bf-a0c8f9adb66c" />
 
 
