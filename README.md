@@ -114,8 +114,10 @@ The script checks if model or tokenizer is not already present in the local spec
 
 <img width="1654" height="344" alt="image" src="https://github.com/user-attachments/assets/c62fe038-ad47-4579-9e9e-582810ad3229" />
 
+When the model is correctly loaded, This is how it gets ready for conversation
 
-<img width="1666" height="935" alt="image" src="https://github.com/user-attachments/assets/6d1642e9-3b1d-42dc-a954-a9f38729c767" />
+<img width="1670" height="939" alt="image" src="https://github.com/user-attachments/assets/df6799c7-99cc-4471-b7bf-a0c8f9adb66c" />
+
 
 
 
