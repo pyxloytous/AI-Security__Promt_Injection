@@ -12,11 +12,18 @@ import os
 import sys
 
 
+
+
 print(f'[-->] Executing Text_generator_poweredby_phi2.py')
 
 # -->  Shows only real errors if occurs else suppresses unnesessary debug warnings
-logging.set_verbosity_error()
+# logging.set_verbosity_error()
 # --> logging.set_verbosity_info()
+logging.disable_progress_bar()
+logging.disable_default_handler()
+
+import logging
+logging.basicConfig(level=logging.ERROR)
 
 # --> Time Counter
 total_start_time = datetime.now()
@@ -67,24 +74,24 @@ def load_model():
         print(
             f'           Downlaoding the model from huggingface repo and would save in {model_path} for next use . . . ')
 
-    # --> Defining model's parameters
-    model = AutoModelForCausalLM.from_pretrained(
-        # --> name or local folder path of the model you want to load
-        model_name,
-        # --> selects which version (revision) of the model to use
-        revision=revision_id,
-        device_map="cpu",             # --> --> forces the model to run on your CPU
-        # --> automatically picks the best data type for your hardware --> float32 (CPU), float16 (GPU)
-        dtype="auto",
-        # --> allows loading custom model code from the model repo
-        trust_remote_code=True,
-    )
+        # --> Defining model's parameters
+        model = AutoModelForCausalLM.from_pretrained(
+            # --> name or local folder path of the model you want to load
+            model_name,
+            # --> selects which version (revision) of the model to use
+            revision=revision_id,
+            device_map="cpu",             # --> --> forces the model to run on your CPU
+            # --> automatically picks the best data type for your hardware --> float32 (CPU), float16 (GPU)
+            torch_dtype="auto",
+            # --> allows loading custom model code from the model repo
+            trust_remote_code=True,
+        )
 
-    # --> saving downlaoded model to specified model path
-    model.save_pretrained(model_path)
+        # --> saving downlaoded model to specified model path
+        model.save_pretrained(model_path)
 
-    # --> Loading the model saved in specific path
-    model = AutoModelForCausalLM.from_pretrained(model_path)
+        # --> Loading the model saved in specific path
+        model = AutoModelForCausalLM.from_pretrained(model_path)
 
     try:
         file_list = [files for files in os.listdir(model_path)]
@@ -100,11 +107,11 @@ def load_model():
             print(
                 f'           generating tokenizer and saving on {model_path} . . .')
 
-        # --> Setting input/output tokenizer
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
+            # --> Setting input/output tokenizer
+            tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-        # --> saving input/oputput tokenizer in a specific path
-        tokenizer.save_pretrained(model_path)
+            # --> saving input/oputput tokenizer in a specific path
+            tokenizer.save_pretrained(model_path)
     except Exception as e:
         print(
             f'[INFO] --> Something went wrong while loading tokenizer. Please check the error below !')
@@ -183,10 +190,19 @@ def start_conversation(prompt_file_flag, user_prompt, model, tokenizer):
 
             if user_prompt and user_prompt not in ['exit', 'x']:
 
-                print(f'[INFO] --> USER_PROMPT_PASSED through FILE')
+                print(f'[INFO] --> USER_PROMPT_PASSED as command line argument')
+
+                # --> inspect prompt with guardrails before passing it to llm model
+                safe_prompt = implement_guardrail(user_prompt)
+                if safe_prompt['safe_prompt'] is None:
+                    continue   # --> if prompt is not save to pass to LLM continue recieving another prompt
+
+                else:
+                    print ( f'==> Input scanner did not detect any issue and prompt seems to be safe: {safe_prompt}')
 
                 # --> setting start to to help Time counter to calculate total time taken during inference
                 start_time = datetime.now()
+
 
                 # --> calling generate_response fucntion to generate the reponse against supplied prompt
                 returned_response = generate_response(
@@ -210,8 +226,13 @@ def start_conversation(prompt_file_flag, user_prompt, model, tokenizer):
                 # --> calling generate_response fucntion to generate the reponse against supplied prompt
                 if prompt:  # --> handles empty prompt and breaks the loop in case of empty prompt
                     print(f'[INFO] --> USER_PROMPT_PASSED through FILE')
+
+                    # --> inspect prompt with guardrails before passing it to llm model
+                    safe_prompt = implement_guardrail(user_prompt)
+                    print ( f'==> This is safe_prompt: {safe_prompt}')
+
                     returned_response = generate_response(
-                        prompt, prompt_file_flag, model, tokenizer)
+                        user_prompt, prompt_file_flag, model, tokenizer)
 
                     # --> Time counter to calculate total time taken during inference
                     end_time = datetime.now()
@@ -221,6 +242,46 @@ def start_conversation(prompt_file_flag, user_prompt, model, tokenizer):
         else:
             sys.exit(
                 f'[-] Prompt nither supplied through an interactivce prompt not a prompt file - Please pass the prompt for the model to work')
+
+
+
+def implement_guardrail(user_prompt):
+    from llm_guard import scan_prompt                              
+    from llm_guard.input_scanners import PromptInjection, Toxicity 
+    from llm_guard.vault import Vault                      
+    from llm_guard.input_scanners import Anonymize         
+
+    vault = Vault()                                        
+    input_scanners = [                                     
+        Anonymize(vault),                                      
+        PromptInjection(),                                     
+        Toxicity()                                         
+    ]
+
+    # Run all scanners on user input
+    safe_prompt, results_valid, results_score = scan_prompt(input_scanners, user_prompt)  
+
+    suspicious_items = []
+    print("\033[96mFinal Input Scan Values: \033[0m")      
+    
+    for key, is_valid in results_valid.items():               
+        print(f"==> key: {key} - passed verification: {is_valid}")
+        # FIX: Only flag the item if it failed validation (is_valid is False)
+        if not is_valid:
+            suspicious_items.append(key)
+            
+    if suspicious_items:
+        print(f"====> suspicious_items: {suspicious_items}")
+        for suspicious_item in suspicious_items:
+            print(f"\033[91mI am sorry. This prompt is invalid, and failed the {suspicious_item} check.\033[0m") 
+        return {'safe_prompt': None}
+    else:
+        print("\033[95mSafe Prompt: \033[0m" + safe_prompt)  
+        print("+" * 50)                                                
+        return {'safe_prompt': safe_prompt}
+
+
+
 
 
 def main():
@@ -249,7 +310,6 @@ def main():
 
     # --> Let's begin the conversation
     start_conversation(prompt_file_flag, user_prompt, model, tokenizer)
-
 
 if __name__ == '__main__':
     main()
